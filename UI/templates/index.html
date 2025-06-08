@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle & Lane Detection</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .progress { height: 25px; }
+        .image-preview { max-width: 100%; max-height: 500px; margin-top: 20px; border: 1px solid #ccc; }
+        .form-section { margin-bottom: 1rem; }
+    </style>
+</head>
+<body class="container mt-5">
+    <h1 class="mb-4 text-primary">Vehicle and Lane Detection</h1>
+
+    <form method="POST" enctype="multipart/form-data" onsubmit="showProgress()">
+        <div class="form-group form-section">
+            <label><strong>Select an Image:</strong></label>
+            <input type="file" name="file" class="form-control-file" required />
+        </div>
+
+        <div class="form-group form-section">
+            <label><strong>Select a Task:</strong></label><br>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="task" value="detect_car" required id="detect_car">
+                <label class="form-check-label" for="detect_car">Detect Cars</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="task" value="count_car" required id="count_car">
+                <label class="form-check-label" for="count_car">Count Cars</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="task" value="lane_segmentation" required id="lane_segmentation">
+                <label class="form-check-label" for="lane_segmentation">Lane Segmentation</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Run</button>
+    </form>
+
+    <div class="progress mt-4" id="progressBar" style="display: none;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%">Processing...</div>
+    </div>
+
+    {% if output_image %}
+        <div class="mt-5">
+            <h4 class="text-success">Output Image:</h4>
+            {% if is_video %}
+                <video width="640" height="360" controls>
+                    <source src="{{ output_image }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <img src="{{ output_image }}" class="image-preview" alt="Output Image">
+            {% endif %}
+            <div>
+                <a class="btn btn-success mt-3" href="{{ output_image }}" download>Download Output</a>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if count is defined %}
+        <div class="alert alert-info mt-3">
+            <strong>Detected Car Count:</strong> {{ count }}
+        </div>
+    {% endif %}
+
+    <script>
+        function showProgress() {
+            document.getElementById("progressBar").style.display = "block";
+        }
+    </script>
+</body>
+</html>
