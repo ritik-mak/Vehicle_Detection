@@ -1,0 +1,6 @@
+train: C:\Users\ritik\Desktop\PROJECT\TPP\TPP_train
+val: C:\Users\ritik\Desktop\PROJECT\TPP\TPP_val
+
+nc: 1
+
+names: ["Car"]

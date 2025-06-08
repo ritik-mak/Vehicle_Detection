@@ -1,0 +1,6 @@
+train: /content/drive/MyDrive/asdfghjklkjhreertyujnbvfthb/DASH/DASH_train
+val: /content/drive/MyDrive/asdfghjklkjhreertyujnbvfthb/DASH/DASH_val
+
+nc: 2
+
+names: ["Car","lane"]
